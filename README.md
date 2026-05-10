@@ -88,3 +88,12 @@ This project uses only static files — no build step or server required.
 - The recipe grid switches from 3 columns → 2 columns → 1 column as the screen gets smaller.
 - The modal form and filter pills are fully scrollable and usable on small screens.
 - Handled entirely through CSS media queries in `style.css`.
+---
+
+## Group Members
+
+| Member | Role |
+|---|---|
+| Kesha Jane L. Ceniza | JavaScript |
+| Dave Francis V. Momongan | HTML |
+| Cris Lorrenz E. Ortojan | CSS |
