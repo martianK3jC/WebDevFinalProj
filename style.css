@@ -1,0 +1,575 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --cream: #faf8f4;
+    --white: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #6b6459;
+    --border: #e8e2d9;
+    --accent: #c0622a;
+    --accent-hover: #a34f1e;
+    --accent-light: #f5ede8;
+    --tag-bg: #f2ede6;
+    --shadow: 0 2px 16px rgba(0,0,0,0.06);
+    --shadow-hover: 0 12px 36px rgba(0,0,0,0.13);
+    --radius-card: 16px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+}
+
+header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 68px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    white-space: nowrap;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.search-wrap {
+    flex: 1;
+    position: relative;
+}
+
+.search-wrap svg {
+    position: absolute;
+    left: 13px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    pointer-events: none;
+}
+
+.search-wrap input {
+    width: 100%;
+    padding: 9px 14px 9px 38px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    background: var(--cream);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.search-wrap input:focus {
+    border-color: var(--accent);
+    background: var(--white);
+    box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.1);
+}
+
+.search-wrap input::placeholder { color: #b0a89e; }
+
+.btn-add {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 100px;
+    padding: 9px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn-add:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(192, 98, 42, 0.35);
+}
+
+.btn-add:active { transform: translateY(0); }
+
+
+.filters {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+}
+
+.filters-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 6px;
+    padding: 12px 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    justify-content: center;
+}
+
+.filters-inner::-webkit-scrollbar { display: none; }
+
+.pill {
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    color: var(--muted);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.18s, color 0.18s, background 0.18s;
+}
+
+.pill:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-light);
+}
+
+.pill.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+
+main {
+    max-width: 1100px;
+    margin: 44px auto;
+    padding: 0 40px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: box-shadow 0.25s, transform 0.25s;
+}
+
+.card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-5px);
+}
+
+.card-img-wrap {
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    flex-shrink: 0;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.45s ease;
+}
+
+.card:hover .card-img { transform: scale(1.06); }
+
+.card-body {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 7px;
+    line-height: 1.3;
+}
+
+.card-desc {
+    font-size: 0.825rem;
+    color: var(--muted);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: 16px;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+}
+
+.card-meta {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    color: #a89e96;
+    text-transform: uppercase;
+}
+
+.btn-view {
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    border-radius: 100px;
+    padding: 6px 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.18s, color 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+
+.btn-view:hover {
+    background: var(--accent);
+    color: var(--white);
+    border-color: var(--accent);
+    box-shadow: 0 3px 10px rgba(192, 98, 42, 0.25);
+}
+
+
+@media (max-width: 860px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 560px) {
+    header, .filters { padding: 0 16px; }
+    main { padding: 0 16px; margin: 24px auto; }
+    .grid { grid-template-columns: 1fr; gap: 18px; }
+    .header-inner { gap: 12px; }
+    .logo { font-size: 1rem; }
+}
+
+/*modal*/
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 200;
+}
+
+.modal:target {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-box {
+    width: 90%;
+    max-width: 720px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 34px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+.modal-box::-webkit-scrollbar { width: 4px; }
+.modal-box::-webkit-scrollbar-thumb { background: var(--border); border-radius: 10px; }
+
+.modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.03em;
+    margin-bottom: 28px;
+}
+
+
+.row {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.two-col   { grid-template-columns: 1fr 1fr; }
+.three-col { grid-template-columns: 1fr 1fr 1fr; }
+
+
+label {
+    display: block;
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-box input::placeholder,
+.modal-box textarea::placeholder { color: #c4bdb6; }
+
+.modal-box input:focus,
+.modal-box textarea:focus,
+.modal-box select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(192, 98, 42, 0.1);
+}
+
+.modal-box textarea { resize: none; line-height: 1.55; }
+.modal-box textarea.large  { height: 130px; }
+.modal-box textarea.medium { height: 110px; }
+
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.modal-footer a { text-decoration: none; }
+
+.btn {
+    padding: 10px 22px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+
+.btn.cancel {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+}
+
+.btn.cancel:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+}
+
+.btn.save {
+    background: var(--accent);
+    color: #fff;
+}
+
+.btn.save:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(192, 98, 42, 0.35);
+}
+
+
+@media (max-width: 700px) {
+    .two-col,
+    .three-col { grid-template-columns: 1fr; }
+
+    .modal-box { padding: 22px; }
+    .modal-title { font-size: 1.3rem; }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   VIEW RECIPE MODAL
+   Shown by script.js adding the "is-open" class.
+────────────────────────────────────────────────────────── */
+
+/* When script.js adds .is-open, the modal becomes visible */
+.modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Top close button — sits above the recipe title */
+.view-close-top {
+    float: right;
+    margin-bottom: 16px;
+    font-size: 0.68rem;
+}
+
+/* Row of small tag-style chips (category, time, difficulty, servings) */
+.view-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+    clear: both;
+}
+
+.view-tag {
+    background: var(--tag-bg);
+    color: var(--muted);
+    border-radius: 100px;
+    padding: 5px 14px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+/* Recipe hero image inside the view modal */
+.view-img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+/* Short description text */
+.view-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+/* Section headings: EQUIPMENT, INGREDIENTS, INSTRUCTIONS */
+.view-section-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 24px;
+    margin-bottom: 10px;
+}
+
+/* Ingredient and equipment bullet lists */
+.view-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.view-list li {
+    padding: 8px 0;
+    font-size: 0.875rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--ink);
+}
+
+.view-list li::before {
+    content: "•";
+    color: var(--accent);
+    font-weight: 700;
+    margin-right: 10px;
+}
+
+/* Instructions block — preserves line breaks from the data */
+.view-instructions {
+    font-size: 0.875rem;
+    line-height: 1.85;
+    color: var(--ink);
+    white-space: pre-line;
+    margin-top: 4px;
+}
+
+/* "No results" message when search/filter finds nothing */
+.no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    padding: 60px 0;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   FORM VALIDATION STYLES
+────────────────────────────────────────────────────────── */
+
+/* Small red error text that appears below an invalid field */
+.field-error {
+    color: #c0392b;
+    font-size: 0.72rem;
+    font-weight: 600;
+    margin-top: 5px;
+    min-height: 1em;       /* Reserve space so layout doesn't jump */
+    letter-spacing: 0.02em;
+}
+
+/* Red border highlight applied to any invalid input/textarea */
+.input-error {
+    border-color: #c0392b !important;
+    box-shadow: 0 0 0 3px rgba(192, 57, 43, 0.12) !important;
+}
+
+/* General form message shown near the Save button */
+.form-message {
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-right: auto;    /* Pushes buttons to the right */
+    padding: 6px 0;
+}
+
+/* Red variant — shown when validation fails */
+.form-message.error {
+    color: #c0392b;
+}
+
+/* Green variant — shown briefly when recipe is saved */
+.form-message.success {
+    color: #27ae60;
+}
+

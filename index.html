@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Book</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <div class="logo"> RECIPE <span>BOOK</span></div>
+            <div class="search-wrap">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <!-- id="searchInput" lets script.js read what the user types -->
+                <input type="text" id="searchInput" placeholder="Search recipes...">
+            </div>
+            <a href="#recipeModal" class="btn-add">+ ADD RECIPE</a>
+        </div>
+    </header>
+
+    <div class="filters">
+        <div class="filters-inner">
+            <!-- data-filter tells script.js which category each pill represents -->
+            <button class="pill active" data-filter="all">ALL</button>
+            <button class="pill" data-filter="vegan">VEGAN</button>
+            <button class="pill" data-filter="breakfast">BREAKFAST</button>
+            <button class="pill" data-filter="lunch">LUNCH</button>
+            <button class="pill" data-filter="dinner">DINNER</button>
+            <button class="pill" data-filter="dessert">DESSERT</button>
+            <button class="pill" data-filter="quick bite">QUICK BITE!</button>
+        </div>
+    </div>
+
+    <main>
+        <!-- id="recipeGrid" is where script.js injects recipe cards -->
+        <div class="grid" id="recipeGrid"></div>
+    </main>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         ADD RECIPE MODAL
+         Opens via CSS :target when the user clicks "+ ADD RECIPE".
+         Cancel button closes it by setting href="#".
+         Save Recipe button is handled by script.js.
+    ══════════════════════════════════════════════════════ -->
+    <div id="recipeModal" class="modal">
+        <div class="modal-box">
+
+            <h1 class="modal-title">ADD NEW RECIPE</h1>
+
+            <div class="row two-col">
+                <div>
+                    <label>Recipe Name *</label>
+                    <!-- id="inputName" so script.js can read this value -->
+                    <input type="text" id="inputName" placeholder="e.g., Herb Roasted Chicken">
+                    <!-- Error message shown by script.js if this field is empty -->
+                    <p class="field-error" id="nameError"></p>
+                </div>
+                <div>
+                    <label>Category *</label>
+                    <select id="inputCategory">
+                        <option value="dinner">Dinner</option>
+                        <option value="breakfast">Breakfast</option>
+                        <option value="lunch">Lunch</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="dessert">Dessert</option>
+                        <option value="quick bite">Quick Bite</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row three-col">
+                <div>
+                    <label>Prep Time *</label>
+                    <input type="text" id="inputPrepTime" placeholder="e.g., 40 Min">
+                    <p class="field-error" id="prepTimeError"></p>
+                </div>
+                <div>
+                    <label>Difficulty *</label>
+                    <select id="inputDifficulty">
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Servings *</label>
+                    <input type="text" id="inputServings" placeholder="e.g., 4">
+                    <p class="field-error" id="servingsError"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Image URL</label>
+                    <input type="text" id="inputImageUrl" placeholder="https:// ...">
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Short Description *</label>
+                    <input type="text" id="inputDescription" placeholder="A brief description of the dish...">
+                    <p class="field-error" id="descriptionError"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Equipment (One Per Line)</label>
+                    <textarea class="medium" id="inputEquipment" placeholder="Roasting pan&#10;Meat thermometer"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Ingredients (One Per Line) *</label>
+                    <textarea class="medium" id="inputIngredients" placeholder="1 whole chicken&#10;1 lemon, sliced&#10;Salt and pepper"></textarea>
+                    <p class="field-error" id="ingredientsError"></p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div>
+                    <label>Instructions *</label>
+                    <textarea class="large" id="inputInstructions" placeholder="1. PREHEAT AND PREPARE&#10;• Preheat your oven to 375°F.&#10;• Blah blah blah."></textarea>
+                    <p class="field-error" id="instructionsError"></p>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <!-- General form feedback: shown by script.js as success or error -->
+                <p class="form-message" id="formMessage"></p>
+                <!-- Cancel: sets href="#" which removes :target and closes modal -->
+                <a href="#">
+                    <button class="btn cancel">Cancel</button>
+                </a>
+                <!-- id="saveBtn" is clicked by script.js to validate and save -->
+                <button class="btn save" id="saveBtn">Save Recipe</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════
+         VIEW RECIPE MODAL
+         Hidden by default. script.js adds class "is-open" to
+         show it when a VIEW RECIPE button is clicked.
+    ══════════════════════════════════════════════════════ -->
+    <div id="viewModal" class="modal">
+        <div class="modal-box">
+
+            <!-- Top close button -->
+            <button id="closeViewBtn" class="btn cancel view-close-top">✕ CLOSE</button>
+
+            <h2 id="viewName" class="modal-title"></h2>
+
+            <!-- Meta tags: category, time, difficulty, servings -->
+            <div class="view-meta-bar">
+                <span id="viewCategory" class="view-tag"></span>
+                <span id="viewPrepTime" class="view-tag"></span>
+                <span id="viewDifficulty" class="view-tag"></span>
+                <span id="viewServings" class="view-tag"></span>
+            </div>
+
+            <img id="viewImg" class="view-img" src="" alt="">
+
+            <p id="viewDescription" class="view-desc"></p>
+
+            <!-- Equipment section (hidden by script.js if no equipment listed) -->
+            <div id="viewEquipmentSection">
+                <h3 class="view-section-title">EQUIPMENT</h3>
+                <ul id="viewEquipmentList" class="view-list"></ul>
+            </div>
+
+            <h3 class="view-section-title">INGREDIENTS</h3>
+            <ul id="viewIngredientsList" class="view-list"></ul>
+
+            <h3 class="view-section-title">INSTRUCTIONS</h3>
+            <p id="viewInstructions" class="view-instructions"></p>
+
+            <div class="modal-footer">
+                <button id="closeViewBtn2" class="btn cancel">CLOSE</button>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Link to the external JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+</html>
