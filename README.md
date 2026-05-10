@@ -2,6 +2,8 @@
 
 A beginner-friendly Recipe Book web app built with plain HTML, CSS, and JavaScript. Browse recipes, filter by category, search by keyword, add your own recipes, and view full recipe details — all in one page, with no frameworks or backend required.
 
+See live demo: https://martiank3jc.github.io/WebDevFinalProj/
+
 ---
 
 ## Features
